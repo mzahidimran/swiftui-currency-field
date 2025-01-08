@@ -67,7 +67,7 @@ struct CurrencyInputField: UIViewRepresentable {
         textField.delegate = context.coordinator
 
         // Set keyboard type
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .asciiCapableNumberPad
 
         // Make visual components invisible
         textField.tintColor = .clear
