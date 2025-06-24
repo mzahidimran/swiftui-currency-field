@@ -72,8 +72,8 @@ struct CurrencyInputField: UIViewRepresentable {
         let done = UIBarButtonItem(
             image: UIImage(systemName: "keyboard.chevron.compact.down"),
             style: .plain,
-            target: context.coordinator,
-            action: #selector(Coordinator.dismissKeyboard)
+            target: textField,
+            action: #selector(UITextField.resignFirstResponder)
         )
         
         toolbar.items = [flex, done]
@@ -140,10 +140,6 @@ struct CurrencyInputField: UIViewRepresentable {
             }
             return true
         }
-        
-        @objc func dismissKeyboard() {
-            UIApplication.shared.endEditing()
-        }
 
         @objc func editingChanged(textField: NoCaretTextField) {
             // Get a mutable copy of last text
@@ -192,11 +188,5 @@ struct CurrencyInputField: UIViewRepresentable {
             // Update new value
             setValue(addValue, textField: textField)
         }
-    }
-}
-
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
