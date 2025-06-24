@@ -194,7 +194,7 @@ struct CurrencyInputField: UIViewRepresentable {
     }
 }
 
-extension CustomTextField.Coordinator {
+extension CurrencyInputField.Coordinator {
     @objc func dismissKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
