@@ -65,7 +65,20 @@ struct CurrencyInputField: UIViewRepresentable {
 
         // Assign delegate
         textField.delegate = context.coordinator
-        textField.inputAccessoryView = makeKeyboardToolbar()
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done = UIBarButtonItem(
+            image: UIImage(systemName: "keyboard.chevron.compact.down"),
+            style: .plain,
+            target: context.coordinator,
+            action: #selector(Coordinator.dismissKeyboard)
+        )
+        
+        toolbar.items = [flex, done]
+        
+        textField.inputAccessoryView = toolbar
         // Set keyboard type
         textField.keyboardType = .asciiCapableNumberPad
 
@@ -143,6 +156,10 @@ struct CurrencyInputField: UIViewRepresentable {
             }
             return true
         }
+        
+        @objc func dismissKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
 
         @objc func editingChanged(textField: NoCaretTextField) {
             // Get a mutable copy of last text
@@ -191,11 +208,5 @@ struct CurrencyInputField: UIViewRepresentable {
             // Update new value
             setValue(addValue, textField: textField)
         }
-    }
-}
-
-extension CurrencyInputField.Coordinator {
-    @objc func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
