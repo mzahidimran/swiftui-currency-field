@@ -142,7 +142,7 @@ struct CurrencyInputField: UIViewRepresentable {
         }
         
         @objc func dismissKeyboard() {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            UIApplication.shared.endEditing()
         }
 
         @objc func editingChanged(textField: NoCaretTextField) {
@@ -192,5 +192,11 @@ struct CurrencyInputField: UIViewRepresentable {
             // Update new value
             setValue(addValue, textField: textField)
         }
+    }
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
