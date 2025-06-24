@@ -99,22 +99,6 @@ struct CurrencyInputField: UIViewRepresentable {
 
         return textField
     }
-    
-    private func makeKeyboardToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done = UIBarButtonItem(
-            image: UIImage(systemName: "keyboard.chevron.compact.down"),
-            style: .plain,
-            target: contextCoordinator,
-            action: #selector(Coordinator.dismissKeyboard)
-        )
-        
-        toolbar.items = [flex, done]
-        return toolbar
-    }
 
     func updateUIView(_ uiView: NoCaretTextField, context: Context) {}
 
